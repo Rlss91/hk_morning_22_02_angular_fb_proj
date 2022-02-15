@@ -23,6 +23,33 @@
             >{{ linkT | titlecase }}</a
           >
         </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            [routerLink]="['/', 'login']"
+            routerLinkActive="you-are-here"
+            >{{ "login" | titlecase }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            [routerLink]="['/', 'signup']"
+            routerLinkActive="you-are-here"
+            >{{ "signup" | titlecase }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <button
+            class="btn btn-danger"
+            aria-current="page"
+            (click)="handleLogoutT()"
+          >
+            {{ "logout" | titlecase }}
+          </button>
+        </li>
       </ul>
     </div>
   </div>

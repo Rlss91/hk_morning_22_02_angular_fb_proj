@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthTService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar-t',
@@ -8,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarTComponent implements OnInit {
   linksArrT: string[];
 
-  constructor() {
-    this.linksArrT = ['home', 'dashboard', 'login', 'signup'];
+  constructor(private authTService: AuthTService, private router: Router) {
+    this.linksArrT = ['home', 'dashboard'];
   }
 
   ngOnInit(): void {}
+
+  handleLogoutT(): void {
+    this.authTService.logoutT();
+    this.router.navigate(['home']);
+  }
 }

@@ -52,4 +52,9 @@ export class AuthTService {
         })
       );
   }
+
+  logoutT(): void {
+    this.isLoggedInT = false;
+    this.tokenDataT = undefined;
+  }
 }
