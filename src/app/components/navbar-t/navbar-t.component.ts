@@ -9,12 +9,17 @@ import { AuthTService } from 'src/app/services/auth.service';
 })
 export class NavbarTComponent implements OnInit {
   linksArrT: string[];
-
+  isloggedIn: boolean;
   constructor(private authTService: AuthTService, private router: Router) {
     this.linksArrT = ['home', 'dashboard'];
+    this.isloggedIn = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authTService.loggedInChangeT.subscribe((status: boolean) => {
+      this.isloggedIn = status;
+    });
+  }
 
   handleLogoutT(): void {
     this.authTService.logoutT();

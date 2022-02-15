@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,8 +9,10 @@ import { environment } from 'src/environments/environment';
 export class AuthTService {
   isLoggedInT: boolean;
   tokenDataT: any;
+  loggedInChangeT: Subject<boolean>;
   constructor(private http: HttpClient) {
     this.isLoggedInT = false;
+    this.loggedInChangeT = new Subject<boolean>();
   }
 
   isAuthT(): boolean {
@@ -31,6 +33,7 @@ export class AuthTService {
         tap((dataT: any) => {
           this.tokenDataT = dataT;
           this.isLoggedInT = true;
+          this.loggedInChangeT.next(this.isLoggedInT);
         })
       );
   }
@@ -49,6 +52,7 @@ export class AuthTService {
         tap((dataT: any) => {
           this.tokenDataT = dataT;
           this.isLoggedInT = true;
+          this.loggedInChangeT.next(this.isLoggedInT);
         })
       );
   }
@@ -56,5 +60,6 @@ export class AuthTService {
   logoutT(): void {
     this.isLoggedInT = false;
     this.tokenDataT = undefined;
+    this.loggedInChangeT.next(this.isLoggedInT);
   }
 }
