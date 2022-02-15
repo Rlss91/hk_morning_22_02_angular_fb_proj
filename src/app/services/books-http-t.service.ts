@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthTService } from './auth.service';
 import { BookFbModelT, BookModelT } from 'src/app/model/Book.fb.model';
+import { FBPostResponse } from '../model/FBPostResponse.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,21 @@ import { BookFbModelT, BookModelT } from 'src/app/model/Book.fb.model';
 export class BooksHttpTService {
   constructor(private http: HttpClient, private authTService: AuthTService) {}
 
-  // createNewBootT()
+  createNewBookT(bookTitleT: string): Observable<FBPostResponse> {
+    return this.http.post<FBPostResponse>(
+      'https://testproject-e937d-default-rtdb.firebaseio.com/books.json',
+      {
+        owner: this.authTService.tokenDataT.localId,
+        title: bookTitleT,
+      },
+      {
+        params: new HttpParams().set(
+          'auth',
+          this.authTService.tokenDataT.idToken
+        ),
+      }
+    );
+  }
 
   getBooksT(): Observable<BookModelT[]> {
     return this.http

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthTService } from 'src/app/services/auth.service';
+import { BooksHttpTService } from 'src/app/services/books-http-t.service';
 
 @Component({
   selector: 'app-add-new-book-t',
@@ -9,7 +10,7 @@ import { AuthTService } from 'src/app/services/auth.service';
 })
 export class AddNewBookTComponent implements OnInit {
   bookTitleT: string;
-  constructor(private http: HttpClient, private authTService: AuthTService) {
+  constructor(private booksHttpTService: BooksHttpTService) {
     this.bookTitleT = '';
   }
 
@@ -17,20 +18,8 @@ export class AddNewBookTComponent implements OnInit {
 
   handleNewBookT(): void {
     //https://testproject-e937d-default-rtdb.firebaseio.com/books.json?auth=ergkojneropiugn439-085jgoinst098g435jyt09jrgtpoisnmt09ps438jt0oiu354ng09543ng092345thg0w3459iuthw0435uito
-    this.http
-      .post<any>(
-        'https://testproject-e937d-default-rtdb.firebaseio.com/books.json',
-        {
-          owner: this.authTService.tokenDataT.localId,
-          title: this.bookTitleT,
-        },
-        {
-          params: new HttpParams().set(
-            'auth',
-            this.authTService.tokenDataT.idToken
-          ),
-        }
-      )
+    this.booksHttpTService
+      .createNewBookT(this.bookTitleT)
       .subscribe((dataFromServerT: any) => {
         console.log('dataFromServerT', dataFromServerT);
       });
