@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthTService } from './auth.service';
+import { BookFbModelT, BookModelT } from 'src/app/model/Book.fb.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,11 @@ import { AuthTService } from './auth.service';
 export class BooksHttpTService {
   constructor(private http: HttpClient, private authTService: AuthTService) {}
 
-  getBooksT(): Observable<any> {
+  // createNewBootT()
+
+  getBooksT(): Observable<BookModelT[]> {
     return this.http
-      .get<any>(
+      .get<{ [key: string]: BookFbModelT }>(
         'https://testproject-e937d-default-rtdb.firebaseio.com/books.json',
         {
           params: new HttpParams().set(
