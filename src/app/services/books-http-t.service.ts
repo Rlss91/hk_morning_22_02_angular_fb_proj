@@ -51,4 +51,19 @@ export class BooksHttpTService {
         })
       );
   }
+
+  /*
+    To delete data you will need to pass the id in this function and it will delete the data
+  */
+  deleteBook(bookid: string): any {
+    return this.http.delete(
+      `https://testproject-e937d-default-rtdb.firebaseio.com/books/${bookid}.json`,
+      {
+        params: new HttpParams().set(
+          'auth',
+          this.authTService.tokenDataT.idToken
+        ),
+      }
+    );
+  }
 }
