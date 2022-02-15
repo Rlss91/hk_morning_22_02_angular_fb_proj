@@ -1,5 +1,9 @@
 <div class="list-group">
-  <button type="button" class="list-group-item list-group-item-action">
-    A second item
+  <button
+    type="button"
+    class="list-group-item list-group-item-action"
+    *ngFor="let book of booksArrT"
+  >
+    {{ book.title }}
   </button>
 </div>
