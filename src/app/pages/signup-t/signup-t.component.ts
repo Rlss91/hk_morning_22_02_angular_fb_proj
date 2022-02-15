@@ -19,9 +19,14 @@ export class SignupTComponent implements OnInit {
     if (this.loginFormT.form.status == 'VALID') {
       this.authTService
         .signupT(this.loginFormT.value.email, this.loginFormT.value.password)
-        .subscribe((data: any) => {
-          console.log('data from ob', data);
-          this.router.navigate(['dashboard']);
+        .subscribe({
+          next: (data: any) => {
+            console.log('data from ob', data);
+            this.router.navigate(['dashboard']);
+          },
+          error: (errT) => {
+            console.error('errT', errT);
+          },
         });
     }
   }
