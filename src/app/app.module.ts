@@ -10,6 +10,8 @@ import { LoginTComponent } from './pages/login-t/login-t.component';
 import { SignupTComponent } from './pages/signup-t/signup-t.component';
 import { DashboardTComponent } from './pages/dashboard-t/dashboard-t.component';
 import { HomeTComponent } from './pages/home-t/home-t.component';
+import { AddNewBookTComponent } from './components/add-new-book-t/add-new-book-t.component';
+import { BooksListTComponent } from './components/books-list-t/books-list-t.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { HomeTComponent } from './pages/home-t/home-t.component';
     SignupTComponent,
     DashboardTComponent,
     HomeTComponent,
+    AddNewBookTComponent,
+    BooksListTComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
